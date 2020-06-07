@@ -2,32 +2,44 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-logging
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-observability
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-leader-election
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 data:
   _example: |
     ################################
@@ -77,8 +89,11 @@ kind: Service
 metadata:
   name: kourier
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 spec:
   ports:
   - name: http2
@@ -98,8 +113,11 @@ kind: Deployment
 metadata:
   name: 3scale-kourier-gateway
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 spec:
   selector:
     matchLabels:
@@ -115,7 +133,11 @@ spec:
         - /tmp/config/envoy-bootstrap.yaml
         command:
         - /usr/local/bin/envoy
+<<<<<<< HEAD
         image: docker.io/maistra/proxyv2-ubi8:1.1.0
+=======
+        image: docker.io/maistra/proxyv2-ubi8:1.0.8
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
         imagePullPolicy: Always
         name: kourier-gateway
         ports:
@@ -128,20 +150,31 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /tmp/config
+<<<<<<< HEAD
         lifecycle:
           preStop:
             exec:
               command: ["curl", "-X", "POST", "--unix", "/tmp/envoy.admin", "http://localhost/healthcheck/fail"]
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
         readinessProbe:
           httpGet:
             httpHeaders:
             - name: Host
               value: internalkourier
+<<<<<<< HEAD
             path: /ready
             port: 8081
             scheme: HTTP
           initialDelaySeconds: 10
           periodSeconds: 5
+=======
+            path: /__internalkouriersnapshot
+            port: 8081
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 2
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
       volumes:
       - name: config-volume
         configMap:
@@ -153,8 +186,11 @@ kind: Deployment
 metadata:
   name: 3scale-kourier-control
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 spec:
   replicas: 1
   selector:
@@ -166,7 +202,11 @@ spec:
         app: 3scale-kourier-control
     spec:
       containers:
+<<<<<<< HEAD
       - image: gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:84d2926a4c3aa02ee45b94905db03a00d96106c777c5afbfd70b579d1165c928
+=======
+      - image: gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:00ec3aef7b58a91247f6bdecbe1f5fad876c13778716a72ec3b2b76e15069d92
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
         imagePullPolicy: Always
         name: kourier-control
         env:
@@ -186,8 +226,11 @@ kind: ClusterRole
 metadata:
   name: 3scale-kourier
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 rules:
 - apiGroups: [""]
   resources: ["pods", "endpoints", "namespaces", "services", "secrets", "configmaps"]
@@ -197,7 +240,11 @@ rules:
   verbs: ["get", "list", "create", "update", "delete", "patch", "watch"]
 - apiGroups: ["networking.internal.knative.dev"]
   resources: ["ingresses"]
+<<<<<<< HEAD
   verbs: ["get", "list", "watch", "patch"]
+=======
+  verbs: ["get", "list", "watch"]
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 - apiGroups: ["networking.internal.knative.dev"]
   resources: ["ingresses/status"]
   verbs: ["update"]
@@ -210,15 +257,21 @@ kind: ServiceAccount
 metadata:
   name: 3scale-kourier
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
   name: 3scale-kourier
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -233,8 +286,11 @@ kind: Service
 metadata:
   name: kourier-internal
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 spec:
   ports:
   - name: http2
@@ -250,8 +306,11 @@ kind: Service
 metadata:
   name: kourier-control
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 spec:
   ports:
   - port: 18000
@@ -266,8 +325,11 @@ kind: ConfigMap
 metadata:
   name: kourier-bootstrap
   namespace: kourier-system
+<<<<<<< HEAD
   labels:
     networking.knative.dev/ingress-provider: kourier
+=======
+>>>>>>> b62f57ebc340e04105fbb9ba0af2fe97acd8f243
 data:
   envoy-bootstrap.yaml: |
     dynamic_resources:
