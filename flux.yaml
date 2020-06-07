@@ -114,7 +114,7 @@ items:
 <<<<<<< HEAD
           - --git-branch=master
 =======
-          - --git-branch=v1.15.9
+          - --git-branch=master
 >>>>>>> v1.15.9
           - --git-poll-interval=30s
           - --git-path=.
